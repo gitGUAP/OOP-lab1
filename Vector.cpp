@@ -3,9 +3,11 @@
 
 Vector::Vector(int l) : Vector(0, l) {}
 
-Vector::Vector(int st, int ed) : start(new int(st)), end(new int(ed)) {
-	len.reset(new int(ed - st));
-	arr.reset(new int[*len]);
+Vector::Vector(int st, int ed) {
+	start = std::make_unique<int>(st);
+	end = std::make_unique<int>(ed);
+	len = std::make_unique<int>(ed - st);
+	arr = std::make_unique<int[]>(*len);
 }
 
 int& Vector::operator[] (int i) {
@@ -69,11 +71,12 @@ Vector Vector::operator/ (const int m) {
 }
 
 Vector::Vector(Vector const & obj) {
-	start.reset(new int(*obj.start));
-	end.reset(new int(*obj.end));
-	len.reset(new int(*obj.len));
+	start = std::make_unique<int>(*obj.start);
+	end = std::make_unique<int>(*obj.end);
+	len = std::make_unique<int>(*obj.len);
 	
-	arr.reset(new int[*len]);
+	arr = std::make_unique<int[]>(*len);
+	
 	memcpy(arr.get(), obj.arr.get(), sizeof(int) * *len);
 }
 

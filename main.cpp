@@ -15,7 +15,6 @@
 using namespace std;
 
 void check() {
-	Vector vec3(3);
 
 	Vector vecl(2);
 	vecl[0] = 1;
